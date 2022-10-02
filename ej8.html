@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="bg-light">
+    <header style="height: 60px;"></header>
+<div class="container col-12">
+    <div class="col-md-6 row" style="margin-left: 25%;">
+        <h2 style="margin-bottom:20px;">Ingrese sus datos</h2>
+        <label for="sueldo">Ingrese su sueldo</label>                                                                        
+        <input type="text" name="sueldo" id="sueldo" style="margin-bottom:20px;">
+        <label for="anhos">Ingrese sus años en la empresa</label> 
+        <input type="text" name="anhos" id="anhos" style="margin-bottom:20px;">
+
+        <button type="button" onclick="calcular()" class="btn btn-info" style="margin-top:20px; margin-bottom:20px;height: 45px;">Calcular</button>
+
+<div id="aca" class="col-md-12 h4"style="border: 2px solid black; height: 450px; margin-top: 20px;">
+
+    <script>
+
+        function calcular(){
+
+            var sueldo,anhos;
+            
+         sueldo = (document.getElementById("sueldo").value);
+         anhos = (document.getElementById("anhos").value);
+
+         if(sueldo == "" ||anhos == ""){
+           alert("Rellena todos los campos")
+        } 
+        else if (sueldo <= 499 && anhos >= 10) {
+
+            resultado = ("Su sueldo aumentara a: " +sueldo * 1.20);
+            document.getElementById("aca").innerHTML= resultado;
+        
+        }else if (sueldo <= 499 && anhos < 10){
+            resultado = ("Su sueldo aumentara a: " +sueldo * 1.05);
+            document.getElementById("aca").innerHTML= resultado;
+        } else {
+            resultado = ("Su sueldo permanecera en: " +sueldo);
+            document.getElementById("aca").innerHTML= resultado;
+        }
+    }
+    </script>
+ </div>
+</div>
+</div>
+
+</body>
+</html>

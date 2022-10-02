@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="bg-light">
+    <header style="height: 100px;"></header>
+<div class="container col-3">
+    <div class="col-12"  >
+        <h2 style="margin-bottom:30px;">Ingrese sus datos</h2>
+        <div class="col-2" >
+            <label for="name">Nombre</label>                                                                        
+            <input type="text" name="name" id="name" onfocus="" onblur="verificar(this)">
+        </div>
+        <br>
+        <div class="col-2" >
+            <label for="pass">Contraseña</label> 
+            <input type="password" name="pass" id="pass" onfocus="" onblur="verificar(this)">
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-info" style="height:45px; margin-top: 30px;">Aceptar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function verificar(control) {
+        if (control.value.length < 7 || control.value.length > 20 ){
+            alert("Ingresa una Contraseña entre 7 y 20 caracteres")
+        }
+        console.log(control.value.length)
+    }
+
+</script>
+</body>
+</html>

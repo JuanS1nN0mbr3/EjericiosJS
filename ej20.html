@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style type="text/css">
+
+/* ::before y ::after te permite añadir elementos sin necesidad de hmtl*/
+*, *::after, *::before {
+	box-sizing: border-box;
+}
+:root {
+	--cell-size:100px;
+	--mark-size: calc(var(--cell-size) * .9);
+}
+body {
+	margin: 0;
+}
+/* vw = view width, vh = width height */
+/* grid-template-columns especifica el numero de columnas en un display grid,en este caso se repite 3 veces y el tamaño es auto */
+.board {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-gap: 5px;
+	justify-content: center;
+	align-content: center;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(3, auto);
+}
+/* Trabaja con :root para hacer el ancho y la altura una variable mas facil de trabajar */
+.cell {
+	width: var(--cell-size);
+	height: var(--cell-size);
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	border: 1px solid black;
+}
+
+/* Hacemos dos celdas negras */
+.cell.x::before,
+.cell.x::after {
+	content: "";
+	position: absolute;
+	width: calc(var(--mark-size) * .15);
+	height: var(--mark-size);
+	background-color: black;
+	
+/* Rotamos las celdas en sentidos contrarios */
+}
+.cell.x::before{
+	transform: rotate(45deg);
+}
+.cell.x::after{
+	transform: rotate(-45deg);
+}
+
+/* Hacemos una silueta redonda */
+.cell.o::before,
+.cell.o::after {
+	content: "";
+	position: absolute;
+	border-radius: 50%;
+}
+/* Hacemos un bloque redondo en esa silueta */
+.cell.o::before{
+	width: var(--mark-size);
+	height: var(--mark-size);
+	background-color: black;
+}
+
+/* Hacemos un bloque blanco mas pequeño dentro */
+.cell.o::after{
+	width: calc(var(--mark-size) * .7);
+	height: calc(var(--mark-size) * .7);
+	background-color: white;
+}
+
+.ganaste {
+	display: none ;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .9);
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 5rem;
+	flex-direction: column;
+}
+
+.ganaste button{
+	font-size: 3rem;
+	background-color: white;
+	border: 1px solid black;
+	padding: .25em .5em;
+	cursor: pointer;
+}
+
+.ganaste button:hover {
+	background-color: black;
+	color: white;
+	border-color: white;
+}
+
+/* Creamos la clase "mostrar" para "ganaste" que cambia el display de none a flex */
+.ganaste.mostrar {
+  display: flex;
+}
+
+h1 {
+	text-align:center;
+	position: fixed;
+	margin-top: 100px;
+}
+
+</style>
+<body class="bg-light">
+	<h1 id="marcaturnos" class="col-md-12">Turno : X</h1>
+	<div class="board" id="board">
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+		<div class="cell" data-cell></div>
+	</div>
+	<div class="ganaste" id="ganaste" >
+		<div data-ganaste-text></div>
+		<button  id="btnrestart">Reiniciar</button>
+	</div>
+
+
+
+<script>
+	const X_CLASS ="x"
+	const O_CLASS ="o"
+	const WINNING_COMBINATIONS = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[0, 4, 8],
+		[2, 4, 6]
+	]
+    const cellElements = document.querySelectorAll("[data-cell]")
+	var marcaturno = document.getElementById("marcaturnos")
+	const ganasteElement = document.getElementById("ganaste")
+	const ganasteTextElement = document.querySelector("[data-ganaste-text]")
+	const btnrestart = document.getElementById("btnrestart")
+	let turns;
+
+	cellElements.forEach(cell => {
+		cell.addEventListener("click", clickear, { once: true})
+	})
+
+	btnrestart.addEventListener("click", comenzar)
+
+	function comenzar() {
+		turns = false
+		cellElements.forEach(cell => {
+		cell.classList.remove(X_CLASS)
+		cell.classList.remove(O_CLASS)
+		cell.removeEventListener("click", clickear)
+		cell.addEventListener("click", clickear, {once: true})
+		ganasteElement.classList.remove("mostrar")
+
+		})
+	}
+
+	function clickear(e) {
+		const cell = e.target
+		const currentClass = turns ? O_CLASS : X_CLASS
+		marcar(cell, currentClass)
+		if (checkW(currentClass)){
+			terminar(false)
+		} else if (empataron()) {
+			terminar(true)
+		} else {
+			cambiarTurno()
+		}
+	}
+
+	function terminar(empate){
+		if (empate) {
+			ganasteTextElement.innerText = "Empataron"
+		} else {
+			ganasteTextElement.innerText  = `${turns ? "O" : "X"} Gano!`
+		}
+		ganasteElement.classList.add("mostrar")
+	}
+
+	function marcar(cell, currentClass) {
+		cell.classList.add(currentClass)
+	}
+
+	function empataron(){
+		return [...cellElements].every(cell=> {
+			return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS)
+		})
+	}
+
+	function cambiarTurno(){
+		if (turns = !turns){
+			document.getElementById("marcaturnos").innerHTML = "Turno : O"
+		} else {
+			document.getElementById("marcaturnos").innerHTML = "Turno : X"
+		}
+	}
+
+	function checkW(currentClass) {
+		return WINNING_COMBINATIONS.some(combination => {
+			return combination.every(index => {
+				return cellElements[index].classList.contains(currentClass)
+			})
+		})
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="bg-light">
+    <header style="height: 60px;"></header>
+<div class="container col-12">
+    <div class="col-md-12 row" style="text-align:center ;" >
+        <h2 style="margin-bottom:30px;">Ingresa los valores</h2>
+
+        <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n1">Numero 1</label>                                                                        
+            <input type="text" name="n1" id="n1" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+            <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n2">Numero 2</label> 
+            <input type="text" name="n2" id="n2" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+        <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n3">Numero 3</label>                                                                        
+            <input type="text" name="n3" id="n3" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+            <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n4">Numero 4</label> 
+            <input type="text" name="n4" id="n4" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+        <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n5">Numero 5</label>                                                                        
+            <input type="text" name="n5" id="n5" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+            <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n6">Numero 6</label> 
+            <input type="text" name="n6" id="n6" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+        <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n7">Numero 7</label>                                                                        
+            <input type="text" name="n7" id="n7" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+            <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n8">Numero 8</label> 
+            <input type="text" name="n8" id="n8" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+        <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="n9">Numero 9</label>                                                                        
+            <input type="text" name="n9" id="n9" value="0" onfocus="vaciar(this)" style="margin: 10px;">
+        </div>
+            <div class="row col-1" style="margin-right: 10px; margin-left: 10px;">
+            <label for="nx">Numero 10</label> 
+            <input type="text" name="nx" id="nx" value="0" onfocus="vaciar(this)"  style="margin: 10px;">
+        </div>
+
+        <button type="button" onclick="calcular()" class="btn btn-info" style="margin-top:10px; height: 45px;">Calcular</button>
+
+        
+<div id="aca" class="col-md-12 h4"style="border: 2px solid black; height: 450px; margin-top: 10px;">
+
+    <script>
+
+        function vaciar(control){
+            control.value="";
+        }
+
+        function calcular() {
+            
+        
+
+        let n1,n2,n3,n4,n5,n6,n7,n8,n9,nx,resultado,negativos,positivos,ceros,numerospar,numerosimpar,sumatoriapar,multiplo15;
+
+            n1 = (document.getElementById("n1").value);
+            n2 = (document.getElementById("n2").value);
+            n3 = (document.getElementById("n3").value);
+            n4 = (document.getElementById("n4").value);
+            n5 = (document.getElementById("n5").value);
+            n6 = (document.getElementById("n6").value);
+            n7 = (document.getElementById("n7").value);
+            n8 = (document.getElementById("n8").value);
+            n9 = (document.getElementById("n9").value);
+            nx = (document.getElementById("nx").value);
+            
+        multiplo15 = 0;
+        sumatoriapar = 0;
+        numerosimpar = 0;
+        numerospar = 0;
+        negativos = 0;
+        positivos = 0;
+        ceros = 0;
+
+        //Calculo Negativos, Positivos y Ceros
+        if(Math.sign(n1) == 1){
+            positivos++;
+        } else if (Math.sign(n1) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+
+        if(Math.sign(n2) == 1){
+            positivos++;
+        } else if (Math.sign(n2) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+
+        if(Math.sign(n3) == 1){
+            positivos++;
+        } else if (Math.sign(n3) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+                    
+        if(Math.sign(n4) == 1){
+            positivos++;
+        } else if (Math.sign(n4) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+                
+        if(Math.sign(n5) == 1){
+            positivos++;
+        } else if (Math.sign(n5) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+                
+        if(Math.sign(n6) == 1){
+            positivos++;
+        } else if (Math.sign(n6) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+                    
+        if(Math.sign(n7) == 1){
+            positivos++;
+        } else if (Math.sign(n7) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+
+        if(Math.sign(n8) == 1){
+            positivos++;
+        } else if (Math.sign(n8) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+
+        if(Math.sign(n9) == 1){
+            positivos++;
+        } else if (Math.sign(n9) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+                
+        if(Math.sign(nx) == 1){
+            positivos++;
+        } else if (Math.sign(nx) == -1) {
+            negativos++
+        } else {
+            ceros++
+        }
+            
+
+        //Calculo Numeros Pares, Numeros Impares y sumatoria de multiplos de 15
+
+        if(n1 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n1) 
+        } else {
+            numerosimpar++
+        }
+                                
+        if(n2 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n2) 
+        } else {
+            numerosimpar++
+        }
+                
+        if(n3 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n3) 
+        } else {
+            numerosimpar++
+        }
+
+        if(n4 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n4) 
+        } else {
+            numerosimpar++
+        }
+
+        if(n5 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n5)
+        } else {
+            numerosimpar++
+        }
+
+                
+        if(n6 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n6) 
+        } else {
+            numerosimpar++
+        }
+
+        if(n7 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n7)
+        } else {
+            numerosimpar++
+        }
+
+                                
+        if(n8 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n8)
+        } else {
+            numerosimpar++
+        }
+
+                                
+        if(n9 % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(n9)
+        } else {
+            numerosimpar++
+        }
+
+                    
+        if(nx % 2 == 0){
+            numerospar++, sumatoriapar += parseInt(nx) 
+        } else {
+            numerosimpar++
+        }
+
+
+        //Calculo Multiplos de 15
+        if(n1 == 0){
+        }
+        else if(n1 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n2 == 0){
+        }
+        else if(n2 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n3 == 0){
+        }
+        else if(n3 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n4 == 0){
+        }
+        else if(n4 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n5 == 0){
+        }
+        else if(n5 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n6 == 0){
+        }
+        else if(n6 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n7 == 0){
+        }
+        else if(n7 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n8 == 0){
+        }
+        else if(n8 % 15 == 0){
+            multiplo15++
+        }
+
+        if(n9 == 0){
+        }
+        else if(n9 % 15 == 0){
+            multiplo15++
+        }
+
+        if(nx == 0){
+        }
+        else if(nx % 15 == 0){
+            multiplo15++
+        }
+
+    resultado =("<br/>En total hay: <br/><br/> Numeros Positivos: " +positivos+ "<br/>Numeros Negativos: "+negativos+ "<br/>Ceros: "+ceros+ "<br/>Numeros pares: "+numerospar+ "<br/>Numeros impares: "+numerosimpar+ "<br/>Sumatoria de Numeros Pares: "+sumatoriapar+"<br/>Numeros multiplos de 15: "+multiplo15)
+    document.getElementById("aca").innerHTML= resultado;
+
+    if(n1 == "" ||n2 == ""||n3 == "" ||n4 == ""||n5 == ""||n6 == ""||n7 == ""||n8 == ""||n9 == ""||nx == ""){
+        alert("Por Favor rellena todos los campos")
+    }
+    }
+    </script>
+
+    </div>
+    </div>
+</div>
+
+</body>
+</html>
