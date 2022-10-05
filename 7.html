@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+	var a = prompt("ingrese el precio del producto")
+	if (isNaN(a)){
+		document.write("por favor ingresar un valor numerico")
+	}
+	var b = prompt("que cantidad del producto va a llevar?")
+	if (isNaN(b)){
+		document.write("por favor ingresar un valor numerico")
+	}
+	var c;
+	document.write("usted debera abonar $",parseFloat(a) * parseFloat(b),);
+    
+    </script>
+</body>
+</html>
